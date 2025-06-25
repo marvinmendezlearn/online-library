@@ -1,17 +1,21 @@
 import { BookOpenIcon, Users2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import DashboardCard from "../components/ui/DashboardCard";
 import { users } from '../data/users';
 import { books } from '../data/books';
+import {rents} from "../data/rents.js";
 import './../styles/dashboard.css';
-import DashboardCard from "../components/ui/DashboardCard";
+
 
 function Dashboard() {
     const [usersData, setUsersData ] = useState([]);
     const [booksData, setBooksData ] = useState([]);
+    const [rentsData, setRentsData ] = useState([]);
 
     useEffect(() => {
         setUsersData(users);
         setBooksData(books);
+        setRentsData(rents);
     }, []);
     return (
         <div className="dashboard">
@@ -24,6 +28,12 @@ function Dashboard() {
             <DashboardCard
                 legend="Cantidad de libros"
                 data={ booksData }
+                icon=<BookOpenIcon />
+            />
+
+            <DashboardCard
+                legend="Cantidad de libros"
+                data={ rentsData }
                 icon=<BookOpenIcon />
             />
         </div>
