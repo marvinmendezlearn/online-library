@@ -1,7 +1,7 @@
 .aside {
     position: fixed;
     background: #4F39F6;
-    background: linear-gradient(90deg, rgba(79, 57, 246, 1) 0%, rgba(67, 45, 215, 1) 100%);
+    background: linear-gradient(90deg, var(--primary-variation-color) 0%, var(--primary-color) 100%);
     inset: 0;
     transform: translate(-100%);
     transition: all ease 0.5s;

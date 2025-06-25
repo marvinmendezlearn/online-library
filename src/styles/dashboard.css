@@ -1,0 +1,47 @@
+.dashboard {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 480px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .dashboard {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background-color: var(--light-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: inset 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: #666;
+    font-size: 1.3rem;
+}
+
+.card__logo {
+    min-width: 4rem;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.card__information p:last-child {
+    font-size:3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+}

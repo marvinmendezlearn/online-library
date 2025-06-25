@@ -1,19 +1,28 @@
-import { BookOpenText, NotebookText, User2 } from "lucide-react";
+import { BookOpenText, Home, NotebookText, User2 } from "lucide-react";
 
 export const navItems = [
     {
         id: 1,
-        label: "Usuarios",
-        icon: User2
+        label: "Inicio",
+        path: "/",
+        icon: Home
     },
     {
         id: 2,
-        label: "Libros",
-        icon: BookOpenText
+        label: "Usuarios",
+        path: "/users",
+        icon: User2
     },
     {
         id: 3,
+        label: "Libros",
+        path: "/books",
+        icon: BookOpenText
+    },
+    {
+        id: 4,
         label: "Alquiler",
+        path: "/rent",
         icon: NotebookText
     },
 ];

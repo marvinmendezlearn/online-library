@@ -20,7 +20,7 @@ function Aside({ asideIsActive, handleSetAsideIsActive }) {
                 <ul>
                     {navItems.map(item => (
                         <li className="nav__item" key={ item.id }>
-                            <Link className="nav__link" to="/">
+                            <Link className="nav__link" to={ item.path }>
                                 <item.icon />
                                 { item.label }
                             </Link>
