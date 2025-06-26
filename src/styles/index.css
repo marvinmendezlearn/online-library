@@ -48,7 +48,7 @@ main.container {
 .overScrollTables {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 .container_main {
   flex: 1;
