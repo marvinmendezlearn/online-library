@@ -20,7 +20,7 @@ function Aside({ asideIsActive, handleSetAsideIsActive }) {
                 <ul>
                     {navItems.map(item => (
                         <li className="nav__item" key={item.id}>
-                            <Link className={`nav__link ${item.path === location.pathname ? 'nav__link--active' : ''}`} to={ item.path }>
+                            <Link className={`nav__link ${item.path === location.pathname ? 'nav__link--active' : ''}`} to={ item.path } onClick={ handleSetAsideIsActive }>
                                 <item.icon />
                                 { item.label }
                             </Link>
