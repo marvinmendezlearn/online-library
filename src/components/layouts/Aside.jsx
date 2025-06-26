@@ -1,10 +1,10 @@
-import { Link } from "react-router"
-import { User2, X } from "lucide-react"
+import {Link, useLocation} from "react-router"
+import {LogInIcon, User2, X} from "lucide-react"
 import "./../../styles/aside.css"
 import { navItems } from "../../data/navItems"
 
 function Aside({ asideIsActive, handleSetAsideIsActive }) {
-    
+    const location = useLocation()
 
     return (
         <aside className={`aside ${asideIsActive ? 'aside--active' : ''}`}>
@@ -19,8 +19,8 @@ function Aside({ asideIsActive, handleSetAsideIsActive }) {
             <nav className="nav">
                 <ul>
                     {navItems.map(item => (
-                        <li className="nav__item" key={ item.id }>
-                            <Link className="nav__link" to={ item.path }>
+                        <li className="nav__item" key={item.id}>
+                            <Link className={`nav__link ${item.path === location.pathname ? 'nav__link--active' : ''}`} to={ item.path }>
                                 <item.icon />
                                 { item.label }
                             </Link>
@@ -28,6 +28,13 @@ function Aside({ asideIsActive, handleSetAsideIsActive }) {
                     ))} 
                 </ul>
             </nav>
+
+            <div className="aside__footer">
+                <button className="aside__footer__button">
+                    <LogInIcon />
+                    Cerrar sesión
+                </button>
+            </div>
         </aside>
     )
 }

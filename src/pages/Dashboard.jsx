@@ -1,9 +1,10 @@
-import { BookOpenIcon, Users2 } from "lucide-react";
+import { BookOpenIcon, Users2, FolderOpenIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import DashboardCard from "../components/ui/DashboardCard";
+import UpcomingDeliveries from "../components/UpcomingDeliveries.jsx";
 import { users } from '../data/users';
 import { books } from '../data/books';
-import {rents} from "../data/rents.js";
+import { rents } from "../data/rents.js";
 import './../styles/dashboard.css';
 
 
@@ -18,25 +19,34 @@ function Dashboard() {
         setRentsData(rents);
     }, []);
     return (
-        <div className="dashboard">
-            <DashboardCard
-                legend="Cantidad de usuarios"
-                data={ usersData }
-                icon=<Users2 />
-            />
-            
-            <DashboardCard
-                legend="Cantidad de libros"
-                data={ booksData }
-                icon=<BookOpenIcon />
-            />
+        <>
+            <section className="dashboard">
+                <DashboardCard
+                    legend="Cantidad de usuarios"
+                    data={ usersData }
+                    icon=<Users2 />
+                />
 
-            <DashboardCard
-                legend="Cantidad de libros"
-                data={ rentsData }
-                icon=<BookOpenIcon />
-            />
-        </div>
+                <DashboardCard
+                    legend="Cantidad de libros"
+                    data={ booksData }
+                    icon=<BookOpenIcon />
+                />
+
+                <DashboardCard
+                    legend="Cantidad de libros"
+                    data={ rentsData }
+                    icon=<FolderOpenIcon />
+                />
+            </section>
+
+            <section className="upcomingDeliveries">
+                <h2 className="upcomingDeliveries__title">Próximas entregas</h2>
+                <UpcomingDeliveries
+                    rents={ rentsData }
+                />
+            </section>
+        </>
     )
 }
 

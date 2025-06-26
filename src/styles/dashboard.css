@@ -45,3 +45,11 @@
     font-weight: 900;
     color: var(--primary-color);
 }
+
+.upcomingDeliveries{
+    margin: 4rem 0;
+}
+.upcomingDeliveries__title{
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
