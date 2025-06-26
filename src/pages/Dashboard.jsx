@@ -42,9 +42,11 @@ function Dashboard() {
 
             <section className="upcomingDeliveries">
                 <h2 className="upcomingDeliveries__title">Próximas entregas</h2>
-                <UpcomingDeliveries
-                    rents={ rentsData }
-                />
+                <div className="overScrollTables">
+                    <UpcomingDeliveries
+                        rents={ rentsData }
+                    />
+                </div>
             </section>
         </>
     )

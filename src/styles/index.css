@@ -28,9 +28,6 @@ section {
   padding: 3rem;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05)
 }
-main.container {
-  margin: 3rem auto;
-}
 ul {
   list-style: none;
 }
@@ -44,6 +41,14 @@ img {
 button {
   background-color: transparent;
   border: 0;
+}
+main.container {
+  margin: 3rem auto;
+}
+.overScrollTables {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
 }
 .container_main {
   flex: 1;
