@@ -1,25 +1,44 @@
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import { Link } from "react-router";
 import { users as userData } from "../data/users.js";
+import usePagination from "../hooks/usePagination.js";
 import './../styles/users.css';
-import {formatDate} from "../lib/helpers.js";
+import Pagination from "../components/Pagination.jsx";
+import {EditIcon, TrashIcon} from "lucide-react";
+import {DeleteModal} from "../lib/alert/DeleteModal.jsx";
 
 function Users(){
-    const [ users, setUsers] = useState([]);
-
-    // Elementos necesarios para que funcione la paginacion
-    const [search, setSearch] = useState("");
-    const [perPage, setPerPage] = useState(5);
-
-    const filterUsers = useMemo(() => {
-        return users.filter(user => {
-            return user.name.toLowerCase().includes(search.toLowerCase());
-        })
-    }, [search, users]);
+    const [users, setUsers] = useState([]);
+    const [modal, setModal] = useState(false);
+    const [id, setId] = useState(null);
 
     useEffect(()=>{
         setUsers(userData)
-    }, [users]);
+    }, []);
+
+    const {
+        filterData: filterUsers,
+        search,
+        setSearch,
+        perPage,
+        setPerPage,
+        page,
+        pages,
+        handleDecreasePage,
+        handleIncreasePage,
+        updateData,
+    } = usePagination(users)
+
+    const handleModalStatus = (id) => {
+        setModal(true);
+        setId(id);
+    }
+
+    const handleModalAction = () => {
+        const userFilter = users.filter(filterUser => filterUser.id !== id);
+        updateData(userFilter);
+        setModal(false);
+    }
 
     return (
         <>
@@ -31,14 +50,13 @@ function Users(){
                     </div>
                     <Link className="users__link-create" to="/users/create">Agregar</Link>
                 </div>
-
                 <form className="searcher">
                     <div className="searcher__text">
                         <input className="searcher__input" type="search" placeholder="Buscar..." value={ search } onChange={ (e) => setSearch(e.target.value) } />
                     </div>
                     <div className="searcher__quantity">
                         <p>Mostrar</p>
-                        <select className="searcher__select" value={perPage} onChange={(e)=>{ setPerPage(parseInt(e.target.value)) }}>
+                        <select className="searcher__select" value={ perPage } onChange={ e => setPerPage(parseInt(e.target.value)) }>
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
@@ -47,36 +65,61 @@ function Users(){
                     </div>
                 </form>
 
-                <div className="overScrollTables">
-                    {filterUsers.length > 0 ? (
-                        <table className="table">
-                            <thead className="table__header">
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Correo electrónico</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody className="table__body">
-                                {filterUsers.map(user => (
-                                    <tr key={user.id}>
-                                        <td>{user.id}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.lastname}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.telephone}</td>
-                                        <td>{user.address}</td>
-                                        <td></td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (<p>No hay usuarios registrados...</p>)}
-                </div>
+                {filterUsers.length > 0 ? (
+                    <>
+                        <div className="overScrollTables">
+                            <table className="table">
+                                <thead className="table__header">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Teléfono</th>
+                                    <th>Dirección</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                                <tbody className="table__body">
+                                    {filterUsers.map(user => (
+                                        <tr key={user.id}>
+                                            <td>{user.id}</td>
+                                            <td>{user.name}</td>
+                                            <td>{user.lastname}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.telephone}</td>
+                                            <td>{user.address}</td>
+                                            <td>
+                                                <div className="table__actions">
+                                                    <button onClick={ () => handleModalStatus(user.id) }>
+                                                        <TrashIcon className="delete-icon" />
+                                                    </button>
+                                                    <button>
+                                                        <EditIcon className="edit-icon" />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <Pagination
+                            search={search}
+                            page={page}
+                            pages={pages}
+                            data={users}
+                            filterData={filterUsers}
+                            handleIncreasePage={handleIncreasePage}
+                            handleDecreasePage={handleDecreasePage}
+                        />
+                    </>
+                ) : (<p className="alert-message">No se encontraron coincidencias...</p>)}
+                <DeleteModal
+                    modal={ modal }
+                    setModal={ setModal }
+                    handleModalAction={ handleModalAction }
+                />
             </section>
         </>
     )

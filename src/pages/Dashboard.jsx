@@ -1,7 +1,7 @@
 import { BookOpenIcon, Users2, FolderOpenIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import DashboardCard from "../components/ui/DashboardCard";
-import UpcomingDeliveries from "../components/UpcomingDeliveries.jsx";
+import UpcomingDeliveries from "../components/ui/UpcomingDeliveries.jsx";
 import { users } from '../data/users';
 import { books } from '../data/books';
 import { rents } from "../data/rents.js";

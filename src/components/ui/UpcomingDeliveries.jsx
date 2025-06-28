@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUpcomingDeliveries, formatDate } from "../lib/helpers.js";
+import { getUpcomingDeliveries, formatDate } from "../../lib/helpers.js";
 
 function UpcomingDeliveries({ rents }) {
     const [upcomingDeliveries, setUpcomingDeliveries] = useState([]);

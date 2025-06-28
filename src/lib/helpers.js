@@ -12,3 +12,10 @@ export const formatDate = string => {
         week: '2-digit',
     }).format(date);
 }
+
+export const normalize = (text) =>
+    text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[\s\W_]+/g, "");

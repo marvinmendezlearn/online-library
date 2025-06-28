@@ -94,5 +94,21 @@ export const users = [
     email: "isabel.torres@example.com",
     telephone: "+34 688 123 987",
     address: "Calle Mar 27, Alicante, España"
+  },
+  {
+    id: 13,
+    name: "Lucía",
+    lastname: "Méndez",
+    email: "isabella.mendez@example.com",
+    telephone: "+34 789 123 965",
+    address: "Calle Mar 28, Cadiz, España"
+  },
+  {
+    id: 14,
+    name: "Luciana",
+    lastname: "Méndez",
+    email: "isabel.mendez@example.com",
+    telephone: "+34 089 423 268",
+    address: "Calle Mar 27, Cadiz, España"
   }
 ]
