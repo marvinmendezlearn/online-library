@@ -1,21 +1,28 @@
-import {Link} from "react-router";
+import {Link, useParams} from "react-router";
 import {ArrowLeft, PlusIcon} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {toast} from "react-toastify";
 import UserForm from "../../components/ui/UserForm.jsx";
+import {users} from "../../data/users.js";
 
 function Edit() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { id } = useParams();
+
+    const currentUser = useMemo(() => {
+        return users.find(user => user.id === +id);
+    }, [id])
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({ defaultValues: currentUser});
     const [isLoading, setIsLoading] = useState(false);
+
 
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000));
-            toast.success("Usuario creado correctamente...");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            toast.success("Usuario actualizado correctamente...");
             console.log(data);
-            reset();
         } catch (error) {
             toast.error(error.message);
             console.error(error);
@@ -47,7 +54,7 @@ function Edit() {
 
                     <button className={`form__submit ${isLoading ? 'form__submit--disabled' : ''}`} disabled={ isLoading } type="submit">
                         <PlusIcon />
-                        Registrar usuario
+                        Actualizar usuario
                     </button>
                 </form>
             </section>

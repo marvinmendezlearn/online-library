@@ -97,7 +97,7 @@ function Users(){
                                                     <button onClick={ () => handleModalStatus(user.id) }>
                                                         <TrashIcon className="delete-icon" />
                                                     </button>
-                                                    <Link to={`/user/${user.id}/edit`}>
+                                                    <Link to={`/users/${user.id}/edit`}>
                                                         <EditIcon className="edit-icon" />
                                                     </Link>
                                                 </div>
