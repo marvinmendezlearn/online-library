@@ -18,15 +18,10 @@ export default function usePagination(data){
         const endIndex = page * perPage;
         const query = normalize(search);
 
-        return currentData.filter(user => {
-            const fields = [
-                normalize(user.name),
-                normalize(user.lastname),
-                normalize(user.telephone),
-                normalize(user.address),
-                normalize(user.email),
-            ];
+        return currentData.filter(currentItem => {
 
+            const fields = [];
+            Object.keys(currentItem).filter(key => key !== 'id').map(field => fields.push(currentItem[field]));
             return fields.some(field => field.includes(query));
         }).slice(startIndex, endIndex);
     }, [search, currentData, page, perPage]);
