@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import { Link } from "react-router";
-import { users as userData } from "../data/users.js";
-import usePagination from "../hooks/usePagination.js";
-import './../styles/users.css';
-import Pagination from "../components/Pagination.jsx";
-import {EditIcon, TrashIcon} from "lucide-react";
-import {DeleteModal} from "../lib/alert/DeleteModal.jsx";
+import { users as userData } from "../../data/users.js";
+import usePagination from "../../hooks/usePagination.js";
+import '../../styles/users.css';
+import Pagination from "../../components/Pagination.jsx";
+import {EditIcon, PlusIcon, TrashIcon} from "lucide-react";
+import {DeleteModal} from "../../lib/alert/DeleteModal.jsx";
 
 function Users(){
     const [users, setUsers] = useState([]);
@@ -48,7 +48,10 @@ function Users(){
                         <h2 className="users__title">Lista de usuarios registrados</h2>
                         <p className="users__legend">Agrega, edita y elimina usuarios...</p>
                     </div>
-                    <Link className="users__link-create" to="/users/create">Agregar</Link>
+                    <Link className="users__link-navigate" to="/users/create">
+                        <PlusIcon />
+                        Agregar
+                    </Link>
                 </div>
                 <form className="searcher">
                     <div className="searcher__text">

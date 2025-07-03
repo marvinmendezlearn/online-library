@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router"
 import Layout from "../components/layouts/Layout"
 import Dashboard from "../pages/Dashboard"
-import Users from "../pages/Users.jsx";
+import Users from "../pages/users/Users.jsx";
+import Create from "../pages/users/Create.jsx";
 
 function Router() {
   return (
@@ -10,6 +11,7 @@ function Router() {
             <Route element={ <Layout /> }>
                 <Route path="/" element={ <Dashboard /> } />
                 <Route path="/users" element={ <Users /> } />
+                <Route path="/users/create" element={ <Create /> } />
             </Route>
         </Routes>
     </BrowserRouter>

@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router"
 import Aside from "./Aside"
 import { CircleUser, Menu } from "lucide-react"
 import { useState } from "react"
+import {ToastContainer} from "react-toastify";
 
 function Layout() {
   const [ asideIsActive, setAsideIsActive ] = useState(false)
@@ -39,6 +40,7 @@ function Layout() {
             <Outlet />
           </main>
         </div>
+        <ToastContainer />
     </div>
   )
 }
