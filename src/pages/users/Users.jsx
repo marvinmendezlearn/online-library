@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import { Link } from "react-router";
 import { users as userData } from "../../data/users.js";
 import usePagination from "../../hooks/usePagination.js";
-import '../../styles/users.css';
 import Pagination from "../../components/Pagination.jsx";
 import {EditIcon, PlusIcon, TrashIcon} from "lucide-react";
 import {DeleteModal} from "../../lib/alert/DeleteModal.jsx";

@@ -39,8 +39,8 @@ function Layout() {
           <main className="container">
             <Outlet />
           </main>
+          <ToastContainer />
         </div>
-        <ToastContainer />
     </div>
   )
 }

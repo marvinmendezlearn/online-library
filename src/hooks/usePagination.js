@@ -21,8 +21,8 @@ export default function usePagination(data){
         return currentData.filter(currentItem => {
 
             const fields = [];
-            Object.keys(currentItem).filter(key => key !== 'id').map(field => fields.push(currentItem[field]));
-            return fields.some(field => field.includes(query));
+            Object.keys(currentItem).map(field => fields.push(normalize(currentItem[field])));
+            return fields.some(field => field.toString().includes(query.toString()));
         }).slice(startIndex, endIndex);
     }, [search, currentData, page, perPage]);
 

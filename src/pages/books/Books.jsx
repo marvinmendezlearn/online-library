@@ -3,6 +3,8 @@ import {PlusIcon} from "lucide-react";
 import usePagination from "../../hooks/usePagination.js";
 import {books as booksData} from "../../data/books.js";
 import {useEffect, useState} from "react";
+import "../../styles/books.css"
+import Pagination from "../../components/Pagination.jsx";
 
 export default  function Books(){
     const [books, setBooks] = useState([]);
@@ -53,6 +55,39 @@ export default  function Books(){
                     <p>resultados</p>
                 </div>
             </form>
+                {filterData.length > 0 ? (
+                    <>
+                        <div className="grid-books">
+                            {filterData.map(book => (
+                                <div className="card-book" key={book.id}>
+                                    <div className="card-book__header"
+                                         style={{backgroundImage: `url(${book.coverImage})`}}></div>
+                                    <div className="card-book__body">
+                                        <h2 className="card-book__title">{book.title}</h2>
+                                        <span className="card-book__categories">{book.category}</span>
+                                        <p className="card-book__label">{book.language}</p>
+                                    </div>
+                                    <div className="card-book__footer">
+                                        <button className="card-book__rent">Rentar</button>
+                                        <div className="card-book__button">
+                                            <button className="card-book__delete">Eliminar</button>
+                                            <Link className="card-book__edit" to="#">Editar</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <Pagination
+                            search={search}
+                            page={page}
+                            pages={pages}
+                            data={books}
+                            filterData={filterData}
+                            handleIncreasePage={handleIncreasePage}
+                            handleDecreasePage={handleDecreasePage}
+                        />
+                    </>
+                ) : <p className="alert-message">No se encontraron coincidencias...</p>}
         </section>
     )
 }

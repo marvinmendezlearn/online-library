@@ -7,6 +7,7 @@
   --gray-dark-color: oklch(70.7% 0.022 261.325);
   --dark-color: #444;
   --white-color: #FFF;
+  --danger-color: #cd5d5d;
 }
 
 html {
@@ -43,6 +44,7 @@ img {
 button {
   background-color: transparent;
   border: 0;
+  font-size: 1.6rem;
 }
 main.container {
   margin: 3rem auto;
