@@ -1,0 +1,94 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.modal-book-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-right: 1rem; /* Add some padding to the right */
+}
+
+.modal-book-info h2 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.modal-book-info p {
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.modal-book-cover {
+    width: 100%;
+    max-height: 300px; /* Adjust max-height for better fit */
+    object-fit: contain;
+}
+
+.modal-rent-form {
+    padding-left: 1rem; /* Add some padding to the left */
+}
+
+.modal-rent-form h3 {
+    margin-top: 0;
+}
+
+.modal-rent-form p {
+    margin-bottom: 0.5rem; /* Add margin to paragraphs for spacing */
+    line-height: 1.5; /* Adjust line height for readability */
+}
+
+.modal-rent-form .form__input {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+    .modal-book-info {
+        text-align: center;
+        padding-right: 0;
+    }
+    .modal-rent-form {
+        padding-left: 0; /* Remove padding on small screens */
+    }
+}

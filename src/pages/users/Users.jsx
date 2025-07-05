@@ -1,19 +1,15 @@
-import {useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import { Link } from "react-router";
-import { users as userData } from "../../data/users.js";
 import usePagination from "../../hooks/usePagination.js";
 import Pagination from "../../components/Pagination.jsx";
 import {EditIcon, PlusIcon, TrashIcon} from "lucide-react";
 import {DeleteModal} from "../../lib/alert/DeleteModal.jsx";
+import {DataContext} from "../../context/DataContext.jsx";
 
 function Users(){
-    const [users, setUsers] = useState([]);
+    const { users, deleteUser } = useContext(DataContext);
     const [modal, setModal] = useState(false);
     const [id, setId] = useState(null);
-
-    useEffect(()=>{
-        setUsers(userData)
-    }, []);
 
     const {
         filterData: filterUsers,
@@ -25,7 +21,6 @@ function Users(){
         pages,
         handleDecreasePage,
         handleIncreasePage,
-        updateData,
     } = usePagination(users)
 
     const handleModalStatus = (id) => {
@@ -34,8 +29,7 @@ function Users(){
     }
 
     const handleModalAction = () => {
-        const userFilter = users.filter(filterUser => filterUser.id !== id);
-        updateData(userFilter);
+        deleteUser(id);
         setModal(false);
     }
 

@@ -1,34 +1,41 @@
-import { useEffect, useState } from "react";
-import { getUpcomingDeliveries, formatDate } from "../../lib/helpers.js";
+import { useContext, useMemo } from "react";
+import { DataContext } from "../../context/DataContext.jsx";
+import { formatFullDate } from "../../lib/helpers.js";
 
-function UpcomingDeliveries({ rents }) {
-    const [upcomingDeliveries, setUpcomingDeliveries] = useState([]);
+function UpcomingDeliveries() {
+    const { rents, books, users } = useContext(DataContext);
 
-    useEffect(() => {
-        const result = getUpcomingDeliveries(rents);
-        setUpcomingDeliveries(result);
-    }, [rents]);
-
+    const recentRents = useMemo(() => {
+        return rents.slice().sort((a, b) => new Date(a.deliveryDate) - new Date(b.deliveryDate)).slice(0, 5).map(rent => {
+            const book = books.find(b => b.id === rent.bookId);
+            const user = users.find(u => u.id === rent.userId);
+            return {
+                ...rent,
+                book: book || { title: 'Desconocido' },
+                user: user || { name: 'Desconocido', lastname: '' }
+            };
+        });
+    }, [rents, books, users]);
 
     return (
         <>
-            {upcomingDeliveries.length > 0 ? (
+            {recentRents.length > 0 ? (
                 <table className="table">
                     <thead className="table__header">
                         <tr>
                             <th>Usuario</th>
                             <th>Libro</th>
-                            <th>Entrega</th>
-                            <th>Estado</th>
+                            <th>Fecha de Renta</th>
+                            <th>Fecha de Entrega</th>
                         </tr>
                     </thead>
                     <tbody className="table__body">
-                        {upcomingDeliveries.map(rent => (
+                        {recentRents.map(rent => (
                             <tr key={rent.id}>
                                 <td>{rent.user.name} {rent.user.lastname}</td>
                                 <td>{rent.book.title}</td>
-                                <td>{formatDate(rent.due_date)}</td>
-                                <td><span className={`badge badge__${rent.status}`}>{rent.status}</span></td>
+                                <td>{formatFullDate(rent.rentDate)}</td>
+                                <td>{formatFullDate(rent.deliveryDate)}</td>
                             </tr>
                         ))}
                     </tbody>

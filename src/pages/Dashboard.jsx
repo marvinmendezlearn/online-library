@@ -1,42 +1,43 @@
-import { BookOpenIcon, Users2, FolderOpenIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { BookOpenIcon, Users2, FolderOpenIcon, LibraryBig, AlertTriangle } from "lucide-react";
+import { useContext, useMemo } from "react";
 import DashboardCard from "../components/ui/DashboardCard";
 import UpcomingDeliveries from "../components/ui/UpcomingDeliveries.jsx";
-import { users } from '../data/users';
-import { books } from '../data/books';
-import { rents } from "../data/rents.js";
+import { DataContext } from "../context/DataContext.jsx";
 import './../styles/dashboard.css';
 
 
 function Dashboard() {
-    const [usersData, setUsersData ] = useState([]);
-    const [booksData, setBooksData ] = useState([]);
-    const [rentsData, setRentsData ] = useState([]);
+    const { users, books, rents } = useContext(DataContext);
 
-    useEffect(() => {
-        setUsersData(users);
-        setBooksData(books);
-        setRentsData(rents);
-    }, []);
+    const overdueRents = useMemo(() => {
+        return rents.filter(rent => rent.status === "overdue").length;
+    }, [rents]);
+
     return (
         <>
             <section className="dashboard">
                 <DashboardCard
-                    legend="Cantidad de usuarios"
-                    data={ usersData }
+                    legend="Usuarios Registrados"
+                    data={ users }
                     icon=<Users2 />
                 />
 
                 <DashboardCard
-                    legend="Cantidad de libros"
-                    data={ booksData }
+                    legend="Libros Disponibles"
+                    data={ books }
                     icon=<BookOpenIcon />
                 />
 
                 <DashboardCard
-                    legend="Cantidad de libros"
-                    data={ rentsData }
-                    icon=<FolderOpenIcon />
+                    legend="Libros Alquilados"
+                    data={ rents }
+                    icon=<LibraryBig />
+                />
+
+                <DashboardCard
+                    legend="Alquileres Vencidos"
+                    data={ [{id: 1, count: overdueRents}] }
+                    icon=<AlertTriangle />
                 />
             </section>
 
@@ -44,7 +45,7 @@ function Dashboard() {
                 <h2 className="upcomingDeliveries__title">Próximas entregas</h2>
                 <div className="overScrollTables">
                     <UpcomingDeliveries
-                        rents={ rentsData }
+                        rents={ rents }
                     />
                 </div>
             </section>

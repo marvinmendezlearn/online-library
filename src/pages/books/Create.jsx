@@ -3,11 +3,11 @@ import {ArrowLeft, PlusIcon} from "lucide-react";
 import {useForm} from "react-hook-form";
 import {useContext, useState} from "react";
 import {toast} from "react-toastify";
-import UserForm from "../../components/ui/UserForm.jsx";
+import BookForm from "../../components/ui/BookForm.jsx";
 import {DataContext} from "../../context/DataContext.jsx";
 
-function CreateUser() {
-    const { addUser } = useContext(DataContext);
+function CreateBook() {
+    const { addBook } = useContext(DataContext);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -15,8 +15,8 @@ function CreateUser() {
         setIsLoading(true);
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            addUser(data);
-            toast.success("Usuario creado correctamente...");
+            addBook(data);
+            toast.success("Libro creado correctamente...");
             reset();
         } catch (error) {
             toast.error(error.message);
@@ -28,13 +28,13 @@ function CreateUser() {
 
     return (
         <>
-            <section className="users">
-                <div className="users__title-nav">
+            <section className="books">
+                <div className="books__title-nav">
                     <div>
-                        <h2 className="users__title">Crear usuario</h2>
-                        <p className="users__legend">Llena el formulario de registro con datos del usuario...</p>
+                        <h2 className="books__title">Crear libro</h2>
+                        <p className="books__legend">Llena el formulario de registro con datos del libro...</p>
                     </div>
-                    <Link className="users__link-navigate" to="/users">
+                    <Link className="books__link-navigate" to="/books">
                         <ArrowLeft  />
                         Volver
                     </Link>
@@ -42,14 +42,14 @@ function CreateUser() {
 
 
                 <form className="form" onSubmit={ handleSubmit(onSubmit) }>
-                    <UserForm
-                        register={ register }
-                        errors={ errors }
+                    <BookForm
+                        register={register}
+                        errors={errors}
                     />
 
                     <button className={`form__submit ${isLoading ? 'form__submit--disabled' : ''}`} disabled={ isLoading } type="submit">
                         <PlusIcon />
-                        Registrar usuario
+                        Registrar libro
                     </button>
                 </form>
             </section>
@@ -57,4 +57,4 @@ function CreateUser() {
     );
 }
 
-export default CreateUser;
+export default CreateBook;

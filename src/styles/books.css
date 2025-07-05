@@ -53,6 +53,7 @@
     width: 100%;
     text-align: center;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 .card-book__rent {
     background: var(--primary-color);

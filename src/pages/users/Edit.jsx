@@ -1,19 +1,20 @@
 import {Link, useParams} from "react-router";
 import {ArrowLeft, PlusIcon} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useMemo, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {toast} from "react-toastify";
 import UserForm from "../../components/ui/UserForm.jsx";
-import {users} from "../../data/users.js";
+import {DataContext} from "../../context/DataContext.jsx";
 
-function Edit() {
+function EditUser() {
     const { id } = useParams();
+    const { users, updateUser } = useContext(DataContext);
 
     const currentUser = useMemo(() => {
         return users.find(user => user.id === +id);
-    }, [id])
+    }, [id, users])
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({ defaultValues: currentUser});
+    const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: currentUser});
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -21,8 +22,8 @@ function Edit() {
         setIsLoading(true);
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
+            updateUser({...data, id: +id});
             toast.success("Usuario actualizado correctamente...");
-            console.log(data);
         } catch (error) {
             toast.error(error.message);
             console.error(error);
@@ -36,8 +37,8 @@ function Edit() {
             <section className="users">
                 <div className="users__title-nav">
                     <div>
-                        <h2 className="users__title">Crear usuario</h2>
-                        <p className="users__legend">Llena el formulario de registro con datos del usuario...</p>
+                        <h2 className="users__title">Editar usuario</h2>
+                        <p className="users__legend">Modifica el formulario para editar el usuario...</p>
                     </div>
                     <Link className="users__link-navigate" to="/users">
                         <ArrowLeft  />
@@ -62,4 +63,4 @@ function Edit() {
     );
 }
 
-export default Edit;
+export default EditUser;

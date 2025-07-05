@@ -22,7 +22,7 @@ export const navItems = [
     {
         id: 4,
         label: "Alquiler",
-        path: "/rent",
+        path: "/rents",
         icon: NotebookText
     },
 ];

@@ -1,18 +1,3 @@
-export const getUpcomingDeliveries = rents => {
-    const pendingDeliveries = rents.filter(rent => rent.status === 'pending');
-    return pendingDeliveries.sort((a, b) => new Date(a.due_date) - new Date(b.due_date)).slice(0, 5);
-}
-
-export const formatDate = string => {
-    const date = new Date(string);
-    return Intl.DateTimeFormat('es-SV', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        week: '2-digit',
-    }).format(date);
-}
-
 export const normalize = (text) =>
     text
         .toString()
@@ -20,3 +5,17 @@ export const normalize = (text) =>
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[\s\W_]+/g, "");
+
+export const formatFullDate = (dateString) => {
+    // Parse YYYY-MM-DD string
+    const [year, month, day] = dateString.split('-').map(Number);
+    // Create a Date object in local time, month is 0-indexed
+    const date = new Date(year, month - 1, day);
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+    return date.toLocaleDateString('es-ES', options);
+};
