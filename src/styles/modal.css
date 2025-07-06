@@ -18,6 +18,8 @@
     width: 90%;
     max-width: 800px;
     position: relative;
+    height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-close {

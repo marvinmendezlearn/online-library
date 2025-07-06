@@ -2,9 +2,16 @@ import {Link, useLocation} from "react-router"
 import {LogInIcon, User2, X} from "lucide-react"
 import "./../../styles/aside.css"
 import { navItems } from "../../data/navItems"
+import {useEffect} from "react";
 
 function Aside({ asideIsActive, handleSetAsideIsActive }) {
     const location = useLocation()
+
+    useEffect(() => {
+        if (asideIsActive) {
+            handleSetAsideIsActive()
+        }
+    }, [location.pathname]);
 
     return (
         <aside className={`aside ${asideIsActive ? 'aside--active' : ''}`}>

@@ -44,7 +44,7 @@ export default  function Books(){
     } = usePagination(books)
 
     return (
-        <section className="books">
+        <section className="books" style={{ overflow: 'hidden' }}>
             <div className="books__title-nav">
                 <div>
                     <h2 className="books__title">Lista de libros disponibles</h2>
