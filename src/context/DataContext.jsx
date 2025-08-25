@@ -1,5 +1,4 @@
 import {createContext, useState, useEffect} from "react";
-import {books as booksData} from "../data/books.js";
 import {users as usersData} from "../data/users.js";
 import {rents as rentsData} from "../data/rents.js";
 
@@ -10,8 +9,15 @@ export const DataProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [rents, setRents] = useState([]);
 
+    const getBooksFormURL = async () => {
+        const response = await fetch('https://operador-service-production.up.railway.app/books');
+        const data = await response.json();
+        setBooks(data);
+    }
+
     useEffect(() => {
-        setBooks(booksData);
+
+        getBooksFormURL();
         setUsers(usersData);
         setRents(rentsData);
     }, []);
